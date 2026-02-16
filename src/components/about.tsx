@@ -67,13 +67,19 @@ export function About() {
                 the sublime.
               </p>
               <p>
-                When he&apos;s not behind a microphone, he&apos;s behind a drum kit — a
-                session musician and educator who treats rhythm like a second
-                language.
+                As a session drummer, he&apos;s laid down tracks for some of Malaysia&apos;s
+                most iconic bands — Pop Shuvit, One Buck Short, Battle Bloom, Trophy
+                Knives, and others across the KL rock and indie scene. On screen, he
+                played Raj in the acclaimed indie film Gadoh (2009).
               </p>
               <p>
-                Based in Kuala Lumpur, he is, by his own admission, an aspiring
-                polymath and unapologetic cheese enthusiast.
+                When he&apos;s not behind a microphone or a drum kit, he&apos;s in the
+                classroom — a music educator who believes rhythm is a second language
+                anyone can learn.
+              </p>
+              <p>
+                Based in Kuala Lumpur, he grew up in Bangsar and is, by his own
+                admission, an aspiring polymath and unapologetic cheese enthusiast.
               </p>
               <p className="text-[#1A1612]/70 italic font-serif text-xl border-l-2 border-[#D4A843] pl-6">
                 &ldquo;I play music, do voice overs, teach occasionally, write stuff,

@@ -3,6 +3,33 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
+const bands = [
+  {
+    name: "Pop Shuvit",
+    genre: "Rap Rock / Nu Metal",
+    role: "Session Drums",
+    description: "Malaysia's leading hip hop rock act. MTV Asia Awards performers.",
+  },
+  {
+    name: "One Buck Short",
+    genre: "Punk Rock / Pop Punk",
+    role: "Session Drums",
+    description: "Opened for Fall Out Boy, My Chemical Romance, Good Charlotte.",
+  },
+  {
+    name: "Battle Bloom",
+    genre: "",
+    role: "Session Drums",
+    description: "",
+  },
+  {
+    name: "Trophy Knives",
+    genre: "",
+    role: "Session Drums",
+    description: "",
+  },
+];
+
 const services = [
   {
     title: "Session Drums",
@@ -66,31 +93,102 @@ export function Music() {
           rhythm like a second language.
         </motion.p>
 
-        {/* Services */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
-          {services.map((service, i) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 40, scale: 0.97 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.9, delay: i * 0.12 }}
-              viewport={{ once: true }}
-              className="group"
-            >
-              <div className="bg-white/60 backdrop-blur-sm border border-[#1A1612]/5 rounded-xl p-10 hover:shadow-xl hover:shadow-[#D4A843]/5 transition-all duration-700">
-                <span className="font-sans text-xs text-[#C17F59] tracking-[0.3em] uppercase block mb-4">
+        {/* Bands & Collaborations */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="mb-20"
+        >
+          <p className="font-sans text-xs tracking-[0.4em] text-[#C17F59] uppercase mb-10">
+            Bands & Collaborations
+          </p>
+
+          <div className="space-y-0">
+            {bands.map((band, i) => (
+              <motion.div
+                key={band.name}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.9,
+                  delay: i * 0.1,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+                viewport={{ once: true, margin: "-50px" }}
+                className="group border-b border-[#1A1612]/10 py-10 sm:py-12 flex flex-col sm:flex-row sm:items-baseline gap-4 sm:gap-8 hover:border-[#D4A843]/40 transition-colors duration-700 cursor-default"
+              >
+                {/* Number */}
+                <span className="font-sans text-sm text-[#C17F59]/50 tracking-wider font-light tabular-nums w-12 shrink-0">
                   0{i + 1}
                 </span>
-                <h3 className="font-serif text-2xl font-bold text-[#1A1612] mb-4 group-hover:text-[#C17F59] transition-colors duration-500">
-                  {service.title}
+
+                {/* Band name */}
+                <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#1A1612] group-hover:text-[#D4A843] transition-colors duration-500 flex-1">
+                  {band.name}
                 </h3>
-                <p className="font-sans text-[#1A1612]/45 leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+
+                {/* Info */}
+                <div className="sm:text-right">
+                  <p className="font-sans text-[#C17F59] text-base font-medium">{band.role}</p>
+                  {band.genre && (
+                    <p className="font-sans text-[#1A1612]/30 text-sm italic mt-1">{band.genre}</p>
+                  )}
+                  {band.description && (
+                    <p className="font-sans text-[#1A1612]/40 text-sm mt-1 max-w-xs">{band.description}</p>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="font-sans text-sm text-[#1A1612]/30 italic mt-8 tracking-wide"
+          >
+            + more — selected credits. Full discography on request.
+          </motion.p>
+        </motion.div>
+
+        {/* Services */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <p className="font-sans text-xs tracking-[0.4em] text-[#C17F59] uppercase mb-10">
+            What He Offers
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
+            {services.map((service, i) => (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 40, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.9, delay: i * 0.12 }}
+                viewport={{ once: true }}
+                className="group"
+              >
+                <div className="bg-white/60 backdrop-blur-sm border border-[#1A1612]/5 rounded-xl p-10 hover:shadow-xl hover:shadow-[#D4A843]/5 transition-all duration-700">
+                  <span className="font-sans text-xs text-[#C17F59] tracking-[0.3em] uppercase block mb-4">
+                    0{i + 1}
+                  </span>
+                  <h3 className="font-serif text-2xl font-bold text-[#1A1612] mb-4 group-hover:text-[#C17F59] transition-colors duration-500">
+                    {service.title}
+                  </h3>
+                  <p className="font-sans text-[#1A1612]/45 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* YouTube CTA */}
         <motion.div

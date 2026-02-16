@@ -9,14 +9,28 @@ const credits = [
     year: "2009",
     role: "Raj",
     type: "Feature Film",
-    description: "A groundbreaking Malaysian indie film exploring racial tensions through the eyes of young people. Raw, powerful, and unapologetically honest.",
+    description: "A groundbreaking Malaysian indie exploring racial tensions and unity through the eyes of young Malaysians.",
+  },
+  {
+    title: "BoBoiBoy: The Movie",
+    year: "2016",
+    role: "Gopal (English)",
+    type: "Animated Feature",
+    description: "Box office hit. Malaysia's biggest animated franchise makes its feature debut.",
+  },
+  {
+    title: "BoBoiBoy: Elemental Heroes",
+    year: "2019",
+    role: "Gopal (English)",
+    type: "Animated Feature",
+    description: "The sequel. Rated 7.4 on IMDB. Voice of Gopal returns.",
   },
   {
     title: "Theatre Productions",
     year: "",
     role: "Various",
     type: "Stage",
-    description: "Multiple theatre productions across Malaysia's vibrant performing arts scene — from experimental to classical.",
+    description: "Multiple productions across KL's performing arts scene — from experimental to classical.",
   },
 ];
 
@@ -51,12 +65,21 @@ export function Screen() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.2 }}
-          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-20 tracking-tight text-[#F5F0E8]"
+          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight text-[#F5F0E8]"
         >
           On Screen
           <br />
           <span className="italic text-[#C17F59]">& Stage</span>
         </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="font-sans text-[#F5F0E8]/40 text-lg mb-20 max-w-xl leading-relaxed"
+        >
+          Film credits and theatre work. For dubbed TV series, see Voice above.
+        </motion.p>
 
         <div className="space-y-16">
           {credits.map((credit, i) => (

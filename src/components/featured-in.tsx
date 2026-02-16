@@ -6,8 +6,9 @@ const shows = [
   "BoBoiBoy",
   "Teen Titans",
   "Adventure Time",
-  "Kim Possible",
-  "Ninjago",
+  "Pop Shuvit",
+  "One Buck Short",
+  "Gadoh",
 ];
 
 export function FeaturedIn() {
