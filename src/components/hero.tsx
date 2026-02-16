@@ -119,7 +119,7 @@ export function Hero() {
           transition={{ delay: 3, duration: 1 }}
           className="text-sm text-white/30 tracking-[0.3em] uppercase"
         >
-          Malaysia 🇲🇾
+          Kuala Lumpur, Malaysia 🇲🇾
         </motion.p>
 
         {/* Scroll indicator */}
