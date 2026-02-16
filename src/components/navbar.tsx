@@ -24,21 +24,21 @@ export function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.8, delay: 1.5 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-        scrolled ? "bg-[#0A0A0B]/90 backdrop-blur-md border-b border-white/5" : ""
+      transition={{ duration: 1, delay: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-700 ${
+        scrolled ? "bg-[#0A0A0B]/90 backdrop-blur-md border-b border-[#F5F0E8]/5" : ""
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="font-mono text-sm tracking-[0.3em] text-[#D4A843] uppercase">
+      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+        <a href="#" className="font-serif text-lg tracking-[0.1em] text-[#D4A843]">
           RLB
         </a>
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-white/50 hover:text-[#D4A843] transition-colors duration-300 tracking-wider uppercase"
+              className="font-sans text-xs text-[#F5F0E8]/40 hover:text-[#D4A843] transition-colors duration-500 tracking-[0.2em] uppercase"
             >
               {link.label}
             </a>

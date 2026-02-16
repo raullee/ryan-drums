@@ -8,14 +8,14 @@ export function Footer() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      className="border-t border-white/5 py-12 px-6"
+      className="bg-[#F5F0E8] border-t border-[#1A1612]/5 py-16 px-6"
     >
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-sm text-white/20 font-mono tracking-wider">
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+        <p className="font-sans text-sm text-[#1A1612]/25 tracking-[0.2em]">
           © {new Date().getFullYear()} Ryan Lee Bhaskaran
         </p>
-        <p className="text-sm text-white/10 font-mono tracking-wider">
-          Musician · Voice Actor · Actor · Educator · Cheese Enthusiast
+        <p className="font-serif text-sm text-[#1A1612]/15 italic tracking-wider">
+          Voice Actor · Musician · Actor · Polymath
         </p>
       </div>
     </motion.footer>

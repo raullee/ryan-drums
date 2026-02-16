@@ -8,83 +8,82 @@ export function About() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="relative py-32 px-6" ref={ref}>
+    <section id="about" className="relative py-36 px-6 bg-[#F5F0E8]" ref={ref}>
       <div className="max-w-6xl mx-auto">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
+        {/* Section number */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 1 }}
-          className="text-sm font-mono tracking-[0.4em] text-[#22D3EE] uppercase mb-4"
+          className="flex items-baseline gap-6 mb-6"
         >
-          04 — About
-        </motion.p>
+          <span className="font-serif text-8xl sm:text-9xl font-bold text-[#D4A843]/10 leading-none">
+            04
+          </span>
+          <p className="font-sans text-xs tracking-[0.4em] text-[#C17F59] uppercase">
+            About
+          </p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-20 tracking-tight text-[#1A1612]"
+        >
+          The <span className="italic text-[#C17F59]">Polymath</span>
+        </motion.h2>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
           {/* Photo placeholder */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 1.2, delay: 0.3 }}
             className="aspect-[3/4] rounded-2xl overflow-hidden relative"
             style={{
-              background: "linear-gradient(135deg, #1A1A1D 0%, #111113 50%, #D4A843 200%)",
+              background: "linear-gradient(135deg, #E8E0D4 0%, #D4CFC5 50%, #C17F59 200%)",
             }}
           >
-            {/* Initials */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-8xl sm:text-9xl font-bold text-white/[0.06] tracking-tight">
+              <span className="font-serif text-8xl sm:text-9xl font-bold text-[#1A1612]/[0.04] tracking-tight">
                 RLB
               </span>
             </div>
-            {/* Accent border */}
-            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#D4A843] via-[#22D3EE] to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#D4A843] via-[#C17F59] to-transparent" />
           </motion.div>
 
           {/* Bio */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 1, delay: 0.5 }}
           >
-            <h2 className="text-4xl sm:text-5xl font-bold mb-8 tracking-tight">
-              Musician. Voice Actor.
-              <br />
-              Actor. Educator.
-              <br />
-              <span className="text-[#D4A843]">Cheese Enthusiast.</span>
-            </h2>
-
-            <div className="space-y-5 text-white/50 leading-relaxed">
+            <div className="space-y-6 font-sans text-[#1A1612]/55 text-lg leading-[1.8]">
               <p>
-                Ryan Lee Bhaskaran is one of those rare creatives who refuses to be
-                put in a box. Based in Malaysia, he&apos;s spent over fifteen years
-                building an extraordinary career that spans voice acting, film, theatre,
-                and music.
-              </p>
-              <p>
-                You&apos;ve probably heard his voice without knowing it. As Gopal in
-                BoBoiBoy — Malaysia&apos;s biggest animated franchise — he helped bring
-                one of the show&apos;s most beloved characters to life. As Robin in Teen
-                Titans, Finn in Adventure Time, and Ron Stoppable in Kim Possible,
-                he became the voice of childhood for an entire generation of
-                Malaysian kids.
+                Ryan Lee Bhaskaran is the voice you&apos;ve heard but never placed.
+                From bringing Gopal to life in Malaysia&apos;s biggest animated franchise
+                to voicing Robin in Teen Titans, his range spans the ridiculous to
+                the sublime.
               </p>
               <p>
                 When he&apos;s not behind a microphone, he&apos;s behind a drum kit — a
-                seasoned session musician and educator who brings the same energy
-                and dedication to every beat. On screen, his role as Raj in the
-                groundbreaking Malaysian indie film Gadoh showcased a different
-                dimension of his talent.
+                session musician and educator who treats rhythm like a second
+                language.
               </p>
-              <p className="text-white/70 italic">
+              <p>
+                Based in Kuala Lumpur, he is, by his own admission, an aspiring
+                polymath and unapologetic cheese enthusiast.
+              </p>
+              <p className="text-[#1A1612]/70 italic font-serif text-xl border-l-2 border-[#D4A843] pl-6">
                 &ldquo;I play music, do voice overs, teach occasionally, write stuff,
                 act sometimes, and consume copious amounts of cheese.&rdquo;
               </p>
             </div>
 
-            <div className="mt-8 pt-8 border-t border-white/5">
-              <p className="text-sm font-mono tracking-[0.3em] text-white/20 uppercase">
-                Aspiring Polymath · Malaysia 🇲🇾
+            <div className="mt-12 pt-8 border-t border-[#1A1612]/10">
+              <p className="font-sans text-sm tracking-[0.3em] text-[#1A1612]/25 uppercase">
+                Aspiring Polymath · Kuala Lumpur, Malaysia 🇲🇾
               </p>
             </div>
           </motion.div>

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
+import { FeaturedIn } from "@/components/featured-in";
 import { Voice } from "@/components/voice";
 import { Screen } from "@/components/screen";
 import { Music } from "@/components/music";
@@ -37,10 +38,16 @@ export default function Home() {
       >
         <Navbar />
         <Hero />
+        <FeaturedIn />
+        <div className="gold-divider" />
         <Voice />
+        <div className="gold-divider" />
         <Screen />
+        <div className="gold-divider" />
         <Music />
+        <div className="gold-divider" />
         <About />
+        <div className="gold-divider" />
         <Contact />
         <Footer />
       </motion.main>

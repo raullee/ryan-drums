@@ -1,29 +1,23 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
 
-const roles = [
-  "Voice Actor",
-  "Musician",
-  "Actor",
-  "Educator",
-  "Polymath",
-];
+const roles = ["Voice Actor", "Musician", "Actor", "Educator", "Polymath"];
 
-function Waveform() {
+function SoundWave() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-[0.07] pointer-events-none">
-      <div className="flex items-end gap-[3px] h-[400px]">
-        {Array.from({ length: 60 }).map((_, i) => (
+    <div className="absolute bottom-0 left-0 right-0 h-24 flex items-end justify-center overflow-hidden opacity-[0.08] pointer-events-none">
+      <div className="flex items-end gap-[2px] h-full w-full max-w-4xl px-8">
+        {Array.from({ length: 80 }).map((_, i) => (
           <div
             key={i}
-            className={`w-[2px] bg-[#D4A843] rounded-full ${
+            className={`flex-1 bg-[#D4A843] rounded-t-full ${
               i % 3 === 0 ? "waveform-bar" : i % 3 === 1 ? "waveform-bar-2" : "waveform-bar-3"
             }`}
             style={{
-              animationDelay: `${i * 0.05}s`,
-              height: "40%",
+              animationDelay: `${i * 0.04}s`,
+              height: "30%",
             }}
           />
         ))}
@@ -34,92 +28,86 @@ function Waveform() {
 
 export function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 2500);
+    }, 2800);
     return () => clearInterval(interval);
   }, []);
 
-  const nameLetters = "RYAN LEE BHASKARAN".split("");
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <Waveform />
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden grain-overlay bg-[#0A0A0B]">
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-transparent to-[#0A0A0B] pointer-events-none z-[1]" />
 
-      {/* Gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#D4A843]/5 rounded-full blur-[150px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#22D3EE]/5 rounded-full blur-[150px]" />
+      {/* Ambient glow */}
+      <motion.div style={{ y }} className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-[#D4A843]/[0.04] rounded-full blur-[200px]" />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[#C17F59]/[0.03] rounded-full blur-[200px]" />
+      </motion.div>
 
-      <div className="relative z-10 text-center px-6">
-        {/* Name - letter by letter */}
-        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight mb-6">
-          {nameLetters.map((letter, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                delay: 0.8 + i * 0.04,
-                ease: [0.25, 0.46, 0.45, 0.94],
-              }}
-              className={letter === " " ? "inline-block w-4 sm:w-6 md:w-8" : "inline-block"}
-              style={{
-                background: "linear-gradient(135deg, #F5F5F5 0%, #D4A843 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              {letter === " " ? "\u00A0" : letter}
-            </motion.span>
-          ))}
-        </h1>
+      <SoundWave />
+
+      <motion.div style={{ opacity }} className="relative z-10 text-center px-6 max-w-5xl">
+        {/* Name */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="font-serif text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold tracking-[-0.02em] mb-8 text-[#F5F0E8]"
+        >
+          Ryan Lee
+          <br />
+          <span className="text-[#D4A843]">Bhaskaran</span>
+        </motion.h1>
 
         {/* Cycling role */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="h-12 flex items-center justify-center mb-8"
+          transition={{ delay: 1.8, duration: 1 }}
+          className="h-12 flex items-center justify-center mb-10"
         >
           <AnimatePresence mode="wait">
             <motion.span
               key={roleIndex}
-              initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
-              transition={{ duration: 0.5 }}
-              className="text-xl sm:text-2xl md:text-3xl font-light tracking-[0.2em] uppercase text-[#D4A843]"
+              initial={{ opacity: 0, y: 20, rotateX: -40 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              exit={{ opacity: 0, y: -20, rotateX: 40 }}
+              transition={{ duration: 0.6 }}
+              className="text-lg sm:text-xl md:text-2xl tracking-[0.3em] uppercase text-[#C17F59] font-sans font-light"
             >
               {roles[roleIndex]}
             </motion.span>
           </AnimatePresence>
         </motion.div>
 
-        {/* Stats */}
-        <motion.div
+        {/* Tagline */}
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2.5, duration: 1 }}
-          className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm text-white/40 font-mono tracking-wider mb-8"
+          transition={{ delay: 2.5, duration: 1.2 }}
+          className="font-sans text-base sm:text-lg text-[#F5F0E8]/40 max-w-lg mx-auto leading-relaxed mb-8"
         >
-          <span>5+ Iconic Characters</span>
-          <span className="text-[#D4A843]">·</span>
-          <span>15+ Years</span>
-          <span className="text-[#D4A843]">·</span>
-          <span>1 Aspiring Polymath</span>
-        </motion.div>
+          The voice you&apos;ve heard but never placed.
+        </motion.p>
 
         {/* Location */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 3, duration: 1 }}
-          className="text-sm text-white/30 tracking-[0.3em] uppercase"
+          className="font-sans text-xs text-[#F5F0E8]/25 tracking-[0.4em] uppercase"
         >
-          Kuala Lumpur, Malaysia 🇲🇾
+          Kuala Lumpur, Malaysia
         </motion.p>
 
         {/* Scroll indicator */}
@@ -131,11 +119,11 @@ export function Hero() {
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-[1px] h-16 bg-gradient-to-b from-[#D4A843] to-transparent"
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-[1px] h-20 bg-gradient-to-b from-[#D4A843]/60 to-transparent"
           />
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

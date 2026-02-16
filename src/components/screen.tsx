@@ -9,14 +9,14 @@ const credits = [
     year: "2009",
     role: "Raj",
     type: "Feature Film",
-    description: "Malaysian indie film exploring racial tensions through the eyes of young people. A powerful, groundbreaking work in Malaysian cinema.",
+    description: "A groundbreaking Malaysian indie film exploring racial tensions through the eyes of young people. Raw, powerful, and unapologetically honest.",
   },
   {
     title: "Theatre Productions",
     year: "",
     role: "Various",
     type: "Stage",
-    description: "Multiple theatre productions across Malaysia's vibrant performing arts scene.",
+    description: "Multiple theatre productions across Malaysia's vibrant performing arts scene — from experimental to classical.",
   },
 ];
 
@@ -25,53 +25,64 @@ export function Screen() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="screen" className="relative py-32 px-6" ref={ref}>
-      <div className="max-w-6xl mx-auto">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
+    <section id="screen" className="relative py-36 px-6 bg-[#1A1612] grain-overlay" ref={ref}>
+      {/* Decorative element */}
+      <div className="absolute bottom-10 left-10 text-[18rem] leading-none font-serif text-[#D4A843]/[0.02] pointer-events-none select-none">
+        ✦
+      </div>
+
+      <div className="max-w-6xl mx-auto relative">
+        {/* Section number */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 1 }}
-          className="text-sm font-mono tracking-[0.4em] text-[#22D3EE] uppercase mb-4"
+          className="flex items-baseline gap-6 mb-6"
         >
-          02 — Screen & Stage
-        </motion.p>
+          <span className="font-serif text-8xl sm:text-9xl font-bold text-[#C17F59]/10 leading-none">
+            02
+          </span>
+          <p className="font-sans text-xs tracking-[0.4em] text-[#C17F59] uppercase">
+            Screen & Stage
+          </p>
+        </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-16 tracking-tight"
+          transition={{ duration: 1, delay: 0.2 }}
+          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-20 tracking-tight text-[#F5F0E8]"
         >
-          On Screen.
+          On Screen
           <br />
-          <span className="text-[#22D3EE]">On Stage.</span>
+          <span className="italic text-[#C17F59]">& Stage</span>
         </motion.h2>
 
-        <div className="space-y-8">
+        <div className="space-y-16">
           {credits.map((credit, i) => (
             <motion.div
               key={credit.title}
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: i * 0.15 }}
               viewport={{ once: true }}
-              className="group border-l-2 border-white/10 hover:border-[#22D3EE] pl-8 py-6 transition-colors duration-500"
+              className="group"
             >
-              <div className="flex flex-wrap items-baseline gap-4 mb-2">
-                <h3 className="text-3xl sm:text-4xl font-bold group-hover:text-[#22D3EE] transition-colors duration-300">
+              <div className="flex flex-wrap items-baseline gap-4 mb-4">
+                <h3 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-[#F5F0E8] group-hover:text-[#C17F59] transition-colors duration-500">
                   {credit.title}
                 </h3>
                 {credit.year && (
-                  <span className="text-sm font-mono text-white/30">{credit.year}</span>
+                  <span className="font-sans text-sm text-[#F5F0E8]/20 tracking-wider">{credit.year}</span>
                 )}
               </div>
-              <div className="flex items-center gap-3 mb-3">
-                <span className="text-sm font-mono tracking-wider uppercase px-3 py-1 rounded-full border border-white/10 text-white/50">
+              <div className="flex items-center gap-4 mb-4">
+                <span className="font-sans text-xs tracking-[0.3em] uppercase px-4 py-1.5 border border-[#F5F0E8]/10 text-[#F5F0E8]/40 rounded-full">
                   {credit.type}
                 </span>
-                <span className="text-[#D4A843] font-medium">as {credit.role}</span>
+                <span className="font-sans text-[#D4A843] font-medium">as {credit.role}</span>
               </div>
-              <p className="text-white/40 max-w-2xl">{credit.description}</p>
+              <p className="font-sans text-[#F5F0E8]/35 max-w-2xl leading-relaxed text-lg">{credit.description}</p>
             </motion.div>
           ))}
         </div>
@@ -80,15 +91,15 @@ export function Screen() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 1, delay: 0.4 }}
           viewport={{ once: true }}
-          className="mt-12"
+          className="mt-16"
         >
           <a
             href="https://www.imdb.com/name/nm15078159"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-mono tracking-wider uppercase text-white/40 hover:text-[#D4A843] transition-colors duration-300 border-b border-white/10 hover:border-[#D4A843] pb-1"
+            className="font-sans inline-flex items-center gap-2 text-sm tracking-[0.2em] uppercase text-[#F5F0E8]/30 hover:text-[#D4A843] transition-colors duration-500 border-b border-[#F5F0E8]/10 hover:border-[#D4A843] pb-1"
           >
             Full credits on IMDB →
           </a>

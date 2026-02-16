@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Ryan Lee Bhaskaran | Voice Actor · Musician · Actor · Educator",
+  title: "Ryan Lee Bhaskaran | Voice Actor · Musician · Actor",
   description:
     "Malaysian voice actor behind iconic characters — Gopal (BoBoiBoy), Robin (Teen Titans), Finn (Adventure Time), Ron Stoppable (Kim Possible). Drummer, actor, and educator.",
   keywords: [
@@ -27,7 +29,7 @@ export const metadata: Metadata = {
     "Ryan Lee Bhaskaran",
   ],
   openGraph: {
-    title: "Ryan Lee Bhaskaran | Voice Actor · Musician · Actor · Educator",
+    title: "Ryan Lee Bhaskaran | Voice Actor · Musician · Actor",
     description:
       "The voice behind Gopal, Robin, Finn the Human, Ron Stoppable & more. Musician, actor, educator, aspiring polymath.",
     type: "website",
@@ -46,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${playfair.variable} ${inter.variable} antialiased`}
       >
         {children}
       </body>
