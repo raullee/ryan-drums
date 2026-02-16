@@ -15,7 +15,7 @@ export function Footer() {
           © {new Date().getFullYear()} Ryan Lee Bhaskaran
         </p>
         <p className="font-serif text-sm text-[#1A1612]/15 italic tracking-wider">
-          Voice Actor · Musician · Actor · Polymath
+          Voice Actor · Musician · Actor · Aspiring Polymath
         </p>
       </div>
     </motion.footer>

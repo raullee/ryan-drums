@@ -31,7 +31,7 @@ export function About() {
           transition={{ duration: 1, delay: 0.2 }}
           className="text-4xl sm:text-5xl md:text-6xl font-bold mb-20 tracking-tight text-[#1A1612]"
         >
-          The <span className="italic text-[#C17F59]">Polymath</span>
+          The <span className="italic text-[#C17F59]">Aspiring Polymath</span>
         </motion.h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">

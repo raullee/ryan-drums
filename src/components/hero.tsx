@@ -3,7 +3,7 @@
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 
-const roles = ["Voice Actor", "Musician", "Actor", "Educator", "Polymath"];
+const roles = ["Voice Actor", "Musician", "Actor", "Educator", "Aspiring Polymath"];
 
 function SoundWave() {
   return (
