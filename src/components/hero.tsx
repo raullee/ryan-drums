@@ -1,178 +1,141 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
-function RhythmParticles() {
-  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; size: number; delay: number; duration: number }>>([]);
+const roles = [
+  "Voice Actor",
+  "Musician",
+  "Actor",
+  "Educator",
+  "Polymath",
+];
 
-  useEffect(() => {
-    setParticles(
-      Array.from({ length: 30 }, (_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 3 + 1,
-        delay: Math.random() * 5,
-        duration: Math.random() * 4 + 3,
-      }))
-    );
-  }, []);
-
+function Waveform() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full bg-[#D4A843]"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-          }}
-          animate={{
-            opacity: [0, 0.6, 0],
-            scale: [0.5, 1, 0.5],
-            y: [0, -30, 0],
-          }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            delay: p.delay,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-function StaggeredText({ text, className }: { text: string; className?: string }) {
-  return (
-    <span className={className}>
-      {text.split("").map((char, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 + i * 0.04, ease: "easeOut" }}
-          className="inline-block"
-        >
-          {char === " " ? "\u00A0" : char}
-        </motion.span>
-      ))}
-    </span>
-  );
-}
-
-export function Hero() {
-  return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center">
-      {/* Gradient overlays for cinematic look */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-transparent to-[#0A0A0B]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,168,67,0.08)_0%,_transparent_70%)]" />
-
-      {/* Spotlight effect */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,_rgba(212,168,67,0.12)_0%,_transparent_60%)] blur-3xl" />
-
-      <RhythmParticles />
-
-      {/* Rhythm pulse line */}
-      <div className="absolute bottom-32 left-0 right-0 flex justify-center">
-        <motion.div
-          className="h-[1px] bg-gradient-to-r from-transparent via-[#D4A843]/40 to-transparent"
-          initial={{ width: 0 }}
-          animate={{ width: "60%" }}
-          transition={{ duration: 2, delay: 1.5, ease: "easeOut" }}
-        />
-      </div>
-
-      {/* Pulse dots on the rhythm line */}
-      <div className="absolute bottom-32 left-0 right-0 flex justify-center gap-16">
-        {[0, 1, 2, 3].map((i) => (
-          <motion.div
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-[0.07] pointer-events-none">
+      <div className="flex items-end gap-[3px] h-[400px]">
+        {Array.from({ length: 60 }).map((_, i) => (
+          <div
             key={i}
-            className="w-2 h-2 rounded-full bg-[#D4A843]"
-            animate={{ opacity: [0.2, 1, 0.2], scale: [0.8, 1.3, 0.8] }}
-            transition={{
-              duration: 1.2,
-              repeat: Infinity,
-              delay: i * 0.3,
-              ease: "easeInOut",
+            className={`w-[2px] bg-[#D4A843] rounded-full ${
+              i % 3 === 0 ? "waveform-bar" : i % 3 === 1 ? "waveform-bar-2" : "waveform-bar-3"
+            }`}
+            style={{
+              animationDelay: `${i * 0.05}s`,
+              height: "40%",
             }}
           />
         ))}
       </div>
+    </div>
+  );
+}
 
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+export function Hero() {
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const nameLetters = "RYAN LEE BHASKARAN".split("");
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <Waveform />
+
+      {/* Gradient orbs */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#D4A843]/5 rounded-full blur-[150px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#22D3EE]/5 rounded-full blur-[150px]" />
+
+      <div className="relative z-10 text-center px-6">
+        {/* Name - letter by letter */}
+        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight mb-6">
+          {nameLetters.map((letter, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.8 + i * 0.04,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
+              className={letter === " " ? "inline-block w-4 sm:w-6 md:w-8" : "inline-block"}
+              style={{
+                background: "linear-gradient(135deg, #F5F5F5 0%, #D4A843 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              {letter === " " ? "\u00A0" : letter}
+            </motion.span>
+          ))}
+        </h1>
+
+        {/* Cycling role */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="h-12 flex items-center justify-center mb-8"
         >
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none">
-            <StaggeredText text="RYAN LEE" className="block text-white" />
-            <StaggeredText text="BHASKARAN" className="block text-[#D4A843] mt-2" />
-          </h1>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={roleIndex}
+              initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+              transition={{ duration: 0.5 }}
+              className="text-xl sm:text-2xl md:text-3xl font-light tracking-[0.2em] uppercase text-[#D4A843]"
+            >
+              {roles[roleIndex]}
+            </motion.span>
+          </AnimatePresence>
         </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="mt-8 text-lg sm:text-xl md:text-2xl text-white/60 tracking-[0.3em] uppercase font-light"
-        >
-          Drummer · Teacher · Performer
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-          className="mt-4 text-sm text-white/40 flex items-center justify-center gap-2"
-        >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-          </svg>
-          Malaysia
-        </motion.p>
-
+        {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.8 }}
-          className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.5, duration: 1 }}
+          className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm text-white/40 font-mono tracking-wider mb-8"
         >
-          <Button
-            asChild
-            size="lg"
-            className="bg-[#D4A843] text-black hover:bg-[#E8C86A] font-semibold text-base px-8"
-          >
-            <a href="#contact">Book a Session</a>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="border-white/20 text-white hover:bg-white/5 hover:border-[#D4A843]/50 font-semibold text-base px-8"
-          >
-            <a href="#about">Learn More</a>
-          </Button>
+          <span>5+ Iconic Characters</span>
+          <span className="text-[#D4A843]">·</span>
+          <span>15+ Years</span>
+          <span className="text-[#D4A843]">·</span>
+          <span>1 Aspiring Polymath</span>
+        </motion.div>
+
+        {/* Location */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3, duration: 1 }}
+          className="text-sm text-white/30 tracking-[0.3em] uppercase"
+        >
+          Malaysia 🇲🇾
+        </motion.p>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3.5, duration: 1 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-[1px] h-16 bg-gradient-to-b from-[#D4A843] to-transparent"
+          />
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <svg className="w-6 h-6 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </motion.div>
     </section>
   );
 }

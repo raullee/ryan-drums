@@ -13,27 +13,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ryan Lee Bhaskaran | Drummer · Teacher · Performer",
+  title: "Ryan Lee Bhaskaran | Voice Actor · Musician · Actor · Educator",
   description:
-    "Professional drum teacher and session drummer based in Malaysia. Available for lessons, studio sessions, live performances, and event bookings.",
+    "Malaysian voice actor behind iconic characters — Gopal (BoBoiBoy), Robin (Teen Titans), Finn (Adventure Time), Ron Stoppable (Kim Possible). Drummer, actor, and educator.",
   keywords: [
+    "voice actor",
+    "Malaysian voice actor",
+    "BoBoiBoy",
+    "Gopal voice actor",
     "drummer",
-    "drum teacher",
+    "session musician",
     "Malaysia",
-    "Malaysia",
-    "session drummer",
-    "drum lessons",
-    "live performance",
+    "Ryan Lee Bhaskaran",
   ],
   openGraph: {
-    title: "Ryan Lee Bhaskaran | Drummer · Teacher · Performer",
+    title: "Ryan Lee Bhaskaran | Voice Actor · Musician · Actor · Educator",
     description:
-      "Professional drum teacher and session drummer based in Malaysia.",
+      "The voice behind Gopal, Robin, Finn the Human, Ron Stoppable & more. Musician, actor, educator, aspiring polymath.",
     type: "website",
     locale: "en_MY",
   },
   icons: {
-    icon: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥁</text></svg>",
+    icon: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎙️</text></svg>",
   },
 };
 
